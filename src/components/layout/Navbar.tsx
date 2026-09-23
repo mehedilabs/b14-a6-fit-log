@@ -30,8 +30,8 @@ export default function Navbar() {
     <Image
       src={NavLogo}
       alt="FitLog Logo"
-      width={19}
-      height={19}
+      width={28}
+      height={28}
       className="object-contain"
     />
   </span>

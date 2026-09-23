@@ -14,7 +14,7 @@ export default function Footer() {
               alt="FitLog Logo"
               width={20}
               height={20}
-              className="object-contain"
+              className="object-contain -rotate-[44deg]"
             />
           </span>
 
