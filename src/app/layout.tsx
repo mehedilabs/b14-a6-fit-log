@@ -6,6 +6,7 @@ import "./globals.css";
 
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import Providers from "@/components/shared/Providers";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -30,13 +31,15 @@ export default function RootLayout({
   return (
     <html lang="en" data-theme="dark">
       <body className={`${inter.variable} ${oswald.variable}`}>
-        <div className="min-h-screen bg-[#0d0e11] text-white">
-          <Navbar />
+        <Providers>
+          <div className="min-h-screen bg-[#0d0e11] text-white">
+            <Navbar />
 
-          <main>{children}</main>
+            <main>{children}</main>
 
-          <Footer />
-        </div>
+            <Footer />
+          </div>
+        </Providers>
       </body>
     </html>
   );
