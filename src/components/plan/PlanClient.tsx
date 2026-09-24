@@ -2,13 +2,15 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
+
 import { LuChevronDown } from "react-icons/lu";
 
 import { getWorkouts } from "@/lib/api";
 import { usePlan } from "@/context/PlanContext";
 import { Workout } from "@/types/workout";
 
-import Spinner from "@/components/shared/Spinner";
+import PlanWorkoutSkeleton from "./PlanWorkoutSkeleton";
 import PlanMetrics from "./PlanMetrics";
 import PlanWorkoutCard from "./PlanWorkoutCard";
 
@@ -18,7 +20,12 @@ type SortKey = "duration" | "calories" | "rating";
 export default function PlanClient() {
   const [workouts, setWorkouts] = useState<Workout[]>([]);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<Tab>("plan");
+  const searchParams = useSearchParams();
+  const tabParam = searchParams.get("tab");
+
+  const [activeTab, setActiveTab] = useState<Tab>(
+    tabParam === "saved" ? "saved" : "plan",
+  );
   const [sortBy, setSortBy] = useState<SortKey>("duration");
 
   const { planIds, savedIds } = usePlan();
@@ -74,10 +81,41 @@ export default function PlanClient() {
 
   if (loading) {
     return (
-      <section className="mx-auto flex min-h-[70vh] max-w-[1280px] flex-col items-center justify-center px-5">
-        <Spinner />
+      <section className="mx-auto max-w-[1280px] px-5 py-12 sm:px-8 lg:py-16">
+        <div className="mb-10">
+          <div className="h-12 w-48 animate-pulse rounded bg-white/10" />
 
-        <p className="mt-4 text-sm text-white/50">Loading workouts…</p>
+          <div className="mt-3 h-4 w-80 max-w-full animate-pulse rounded bg-white/10" />
+        </div>
+
+        <div className="grid grid-cols-3 overflow-hidden rounded-2xl border border-[#272b33] bg-[#15171c]">
+          <div className="border-r border-[#272b33] p-5">
+            <div className="mx-auto h-9 w-12 animate-pulse rounded bg-white/10" />
+            <div className="mx-auto mt-2 h-3 w-16 animate-pulse rounded bg-white/10" />
+          </div>
+
+          <div className="border-r border-[#272b33] p-5">
+            <div className="mx-auto h-9 w-12 animate-pulse rounded bg-white/10" />
+            <div className="mx-auto mt-2 h-3 w-16 animate-pulse rounded bg-white/10" />
+          </div>
+
+          <div className="p-5">
+            <div className="mx-auto h-9 w-12 animate-pulse rounded bg-white/10" />
+            <div className="mx-auto mt-2 h-3 w-16 animate-pulse rounded bg-white/10" />
+          </div>
+        </div>
+
+        <div className="mt-10 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+          <div className="h-10 w-48 animate-pulse rounded-lg bg-white/10" />
+
+          <div className="h-10 w-32 animate-pulse rounded-md bg-white/10" />
+        </div>
+
+        <div className="mt-6 space-y-4">
+          {Array.from({ length: 3 }).map((_, index) => (
+            <PlanWorkoutSkeleton key={index} />
+          ))}
+        </div>
       </section>
     );
   }
@@ -103,7 +141,7 @@ export default function PlanClient() {
           <input
             type="radio"
             name="plan_tabs"
-            className="tab"
+            className="tab checked:bg-[#15171c] checked:text-[#ccff00]"
             aria-label="Today's Plan"
             checked={activeTab === "plan"}
             onChange={() => setActiveTab("plan")}
@@ -112,7 +150,7 @@ export default function PlanClient() {
           <input
             type="radio"
             name="plan_tabs"
-            className="tab"
+            className="tab checked:bg-[#15171c] checked:text-[#ccff00]"
             aria-label="Saved"
             checked={activeTab === "saved"}
             onChange={() => setActiveTab("saved")}

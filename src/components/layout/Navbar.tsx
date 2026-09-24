@@ -70,7 +70,7 @@ export default function Navbar() {
 
         <div className="hidden items-center gap-3 md:flex">
           <Link
-            href="/my-plan"
+            href="/my-plan?tab=plan"
             className="flex items-center gap-2 rounded-full bg-[#ccff00] px-4 py-2 text-sm font-bold text-black"
           >
             Plan
@@ -80,7 +80,7 @@ export default function Navbar() {
           </Link>
 
           <Link
-            href="/my-plan"
+            href="/my-plan?tab=saved"
             className="flex items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-sm font-bold"
           >
             Saved
@@ -114,7 +114,7 @@ export default function Navbar() {
             </Link>
 
             <Link
-              href="/my-plan"
+              href="/my-plan?tab=plan"
               onClick={() => setMenuOpen(false)}
               className={`text-sm font-medium ${
                 planActive ? "text-[#ccff00]" : "text-white/70"
@@ -125,7 +125,7 @@ export default function Navbar() {
 
             <div className="flex gap-3 pt-2">
               <Link
-                href="/my-plan"
+                href="/my-plan?tab=plan"
                 onClick={() => setMenuOpen(false)}
                 className="rounded-full bg-[#ccff00] px-4 py-2 text-sm font-bold text-black"
               >
@@ -133,7 +133,7 @@ export default function Navbar() {
               </Link>
 
               <Link
-                href="/my-plan"
+                href="/my-plan?tab=saved"
                 onClick={() => setMenuOpen(false)}
                 className="rounded-full border border-white/20 px-4 py-2 text-sm font-bold"
               >

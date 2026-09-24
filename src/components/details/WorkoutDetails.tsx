@@ -55,28 +55,37 @@ export default function WorkoutDetails({ workout }: WorkoutDetailsProps) {
   }
 
   return (
-    <section className="mx-auto max-w-[1280px] px-5 py-10 sm:px-8 lg:py-16">
+    <section className="mx-auto max-w-[1280px] px-5 py-10 sm:px-8 lg:pt-8 lg:pb-16">
+      {" "}
       <Link
         href="/#library"
         className="mb-8 inline-flex items-center gap-2 text-sm text-white/50 transition hover:text-white"
       >
+        {" "}
         <LuArrowLeft size={16} />
-        Back to library
+        Back to library{" "}
       </Link>
-
       <div className="grid gap-10 lg:grid-cols-2 lg:items-start">
         <div className="relative aspect-square overflow-hidden rounded-3xl border border-[#272b33] bg-[#15171c]">
           <Image
             src={workout.image}
             alt={workout.name}
-            fill
-            className="object-cover"
-            sizes="(max-width: 1024px) 100vw, 50vw"
+            width={588}
+            height={773}
+            priority
+            className="object-contain"
           />
         </div>
 
         <div>
-          <div className="mb-5 flex flex-wrap gap-2">
+          <h1 className="display-font text-3xl font-bold uppercase leading-[0.9] sm:text-4xl">
+            {workout.name}
+          </h1>
+
+          <p className="mt-4 pb-3 leading-6 text-white/55">
+            {workout.description}
+          </p>
+          <div className="mb-4 flex flex-wrap gap-2">
             {workout.muscleGroups.map((muscle) => (
               <span
                 key={muscle}
@@ -87,30 +96,7 @@ export default function WorkoutDetails({ workout }: WorkoutDetailsProps) {
             ))}
           </div>
 
-          <h1 className="display-font text-5xl font-bold uppercase leading-none sm:text-6xl">
-            {workout.name}
-          </h1>
-
-          <p className="mt-6 leading-7 text-white/55">{workout.description}</p>
-
-          <div className="mt-7 flex flex-wrap gap-5 border-y border-white/10 py-5 text-sm text-white/60">
-            <span className="flex items-center gap-2">
-              <LuClock3 size={16} />
-              {workout.duration} min
-            </span>
-
-            <span className="flex items-center gap-2">
-              <LuFlame size={16} />
-              {workout.caloriesBurned} kcal
-            </span>
-
-            <span className="flex items-center gap-2">
-              <LuStar size={16} />
-              {workout.rating}
-            </span>
-          </div>
-
-          <div className="mt-7 overflow-hidden rounded-2xl border border-[#272b33]">
+          <div className="mt-5 overflow-hidden rounded-2xl border border-[#272b33] bg-[#1E2330]">
             {[
               ["EQUIPMENT", workout.equipment],
               ["DIFFICULTY", workout.difficulty],
@@ -122,37 +108,32 @@ export default function WorkoutDetails({ workout }: WorkoutDetailsProps) {
             ].map(([label, value], index, array) => (
               <div
                 key={label}
-                className={`grid grid-cols-2 ${
+                className={`flex items-center justify-between ${
                   index !== array.length - 1 ? "border-b border-[#272b33]" : ""
-                }`}
+                } px-3 py-2.5`}
               >
-                <div className="p-4 text-xs font-bold tracking-wider text-white/40">
+                <span className="text-[10px] font-bold tracking-wider text-[#9CA3AF]">
                   {label}
-                </div>
+                </span>
 
-                <div className="border-l border-[#272b33] p-4 text-sm">
-                  {value}
-                </div>
+                <span className="text-xs text-white">{value}</span>
               </div>
             ))}
           </div>
 
-          <div className="mt-10">
-            <h2 className="display-font text-3xl font-bold uppercase">
+          <div className="mt-7">
+            <h2 className="text-[16px] font-extrabold uppercase">
               Instructions
             </h2>
 
-            <ol className="mt-5 space-y-4">
+            <ol className="mt-4 space-y-3">
               {workout.instructions.map((instruction, index) => (
-                <li
-                  key={instruction}
-                  className="flex gap-4 border-b border-white/5 pb-4"
-                >
-                  <span className="grid size-7 shrink-0 place-items-center rounded-full bg-[#ccff00] text-xs font-black text-black">
-                    {index + 1}
+                <li key={instruction} className="flex gap-3">
+                  <span className="shrink-0 text-sm font-bold text-[#ccff00]">
+                    {index + 1}.
                   </span>
 
-                  <p className="text-sm leading-6 text-white/60">
+                  <p className="text-sm leading-5 text-white/60">
                     {instruction}
                   </p>
                 </li>
@@ -160,29 +141,33 @@ export default function WorkoutDetails({ workout }: WorkoutDetailsProps) {
             </ol>
           </div>
 
-          <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row">
             <button
               type="button"
               onClick={handleAddToPlan}
-              disabled={
-                !hydrated ||
-                alreadyInPlan ||
-                (planIds.length >= 5 && !alreadyInPlan)
-              }
-              className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-[#ccff00] px-6 py-3 text-sm font-black text-black transition hover:bg-[#d8ff33] disabled:cursor-not-allowed disabled:opacity-40"
+              disabled={!hydrated || (planIds.length >= 5 && !alreadyInPlan)}
+              className={`inline-flex min-w-0 w-fit items-center justify-center gap-2 rounded-[12px] px-4 py-2 text-sm font-black transition ${
+                alreadyInPlan
+                  ? "cursor-not-allowed border border-[#ccff00]/30 bg-[#1E2330] text-[#ccff00] opacity-40"
+                  : "bg-[#ccff00] text-black hover:bg-[#d8ff33]"
+              } disabled:cursor-not-allowed disabled:opacity-40`}
             >
               <LuCalendarPlus size={18} />
-              {alreadyInPlan ? "In today's plan" : "Add to today's plan"}
+              {alreadyInPlan ? "In today's plan ✓" : "Add to today's plan"}
             </button>
 
             <button
               type="button"
               onClick={handleSave}
-              disabled={!hydrated || alreadySaved}
-              className="inline-flex flex-1 items-center justify-center gap-2 rounded-full border border-white/15 px-6 py-3 text-sm font-bold transition hover:border-white/40 disabled:cursor-not-allowed disabled:opacity-40"
+              disabled={!hydrated}
+              className={`inline-flex min-w-0 w-fit items-center justify-center gap-2 rounded-[12px] px-3 py-2 text-sm font-bold transition ${
+                alreadySaved
+                  ? "cursor-not-allowed border border-white/15 bg-[#1E2330] text-white/60 opacity-40"
+                  : "border border-white/15 text-white hover:border-white/40"
+              } disabled:cursor-not-allowed disabled:opacity-40`}
             >
               <LuBookmark size={18} />
-              {alreadySaved ? "Saved" : "Save for later"}
+              {alreadySaved ? "Saved ✓" : "Save for later"}
             </button>
           </div>
         </div>

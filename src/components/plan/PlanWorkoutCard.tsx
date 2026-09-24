@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { LuCheck, LuX } from "react-icons/lu";
+import { LuCheck, LuClock3, LuFlame, LuStar, LuX } from "react-icons/lu";
 import { toast } from "react-toastify";
 
 import { usePlan } from "@/context/PlanContext";
@@ -56,9 +56,20 @@ export default function PlanWorkoutCard({
         <p className="mt-1 text-sm text-white/40">{workout.equipment}</p>
 
         <div className="mt-4 flex flex-wrap gap-4 text-xs text-white/50">
-          <span>{workout.duration} min</span>
-          <span>{workout.caloriesBurned} kcal</span>
-          <span>★ {workout.rating}</span>
+          <span className="inline-flex items-center gap-1.5">
+            <LuClock3 size={14} className="text-[#ccff00]" />
+            {workout.duration} min
+          </span>
+
+          <span className="inline-flex items-center gap-1.5">
+            <LuFlame size={14} className="text-[#ccff00]" />
+            {workout.caloriesBurned} kcal
+          </span>
+
+          <span className="inline-flex items-center gap-1.5">
+            <LuStar size={14} className="fill-[#ccff00] text-[#ccff00]" />
+            {workout.rating}
+          </span>
         </div>
       </div>
 

@@ -10,7 +10,14 @@ export default function Providers({ children }: { children: React.ReactNode }) {
     <PlanProvider>
       {children}
 
-      <ToastContainer position="bottom-right" autoClose={2500} theme="dark" />
+      <ToastContainer
+        position="top-right"
+        autoClose={2500}
+        theme="dark"
+        hideProgressBar
+        toastClassName="text-sm"
+        style={{ width: "320px" }}
+      />
     </PlanProvider>
   );
 }

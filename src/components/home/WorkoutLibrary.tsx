@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { getWorkouts } from "@/lib/api";
 import { Workout } from "@/types/workout";
 
-import Spinner from "@/components/shared/Spinner";
+import WorkoutCardSkeleton from "@/components/workouts/WorkoutCardSkeleton";
 import WorkoutCard from "@/components/workouts/WorkoutCard";
 
 export default function WorkoutLibrary() {
@@ -32,12 +32,8 @@ export default function WorkoutLibrary() {
   }, []);
 
   return (
-    <section
-      id="library"
-      className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8"
-    >
+    <section id="library" className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8">
       <div className="mb-10">
-    
         <h2 className="display-font text-4xl font-bold uppercase sm:text-5xl">
           The Library
         </h2>
@@ -48,8 +44,10 @@ export default function WorkoutLibrary() {
       </div>
 
       {loading && (
-        <div className="flex min-h-72 items-center justify-center">
-          <Spinner />
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {Array.from({ length: 6 }).map((_, index) => (
+            <WorkoutCardSkeleton key={index} />
+          ))}
         </div>
       )}
 

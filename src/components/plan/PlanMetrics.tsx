@@ -12,7 +12,9 @@ export default function PlanMetrics({
   return (
     <div className="grid grid-cols-3 overflow-hidden rounded-2xl border border-[#272b33] bg-[#15171c]">
       <div className="border-r border-[#272b33] p-5 text-center">
-        <p className="display-font text-3xl font-bold">{exercises}</p>
+        <p className="display-font text-3xl font-bold text-[#ccff00]">
+          {exercises}
+        </p>
 
         <p className="mt-1 text-xs uppercase tracking-wider text-white/40">
           Exercises
