@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { LuChevronDown } from "react-icons/lu";
 
 import { getWorkouts } from "@/lib/api";
 import { usePlan } from "@/context/PlanContext";
@@ -12,11 +13,13 @@ import PlanMetrics from "./PlanMetrics";
 import PlanWorkoutCard from "./PlanWorkoutCard";
 
 type Tab = "plan" | "saved";
+type SortKey = "duration" | "calories" | "rating";
 
 export default function PlanClient() {
   const [workouts, setWorkouts] = useState<Workout[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<Tab>("plan");
+  const [sortBy, setSortBy] = useState<SortKey>("duration");
 
   const { planIds, savedIds } = usePlan();
 
@@ -41,7 +44,23 @@ export default function PlanClient() {
     savedIds.includes(workout.id),
   );
 
-  const currentWorkouts = activeTab === "plan" ? planWorkouts : savedWorkouts;
+  const currentWorkouts = useMemo(() => {
+    const items = activeTab === "plan" ? [...planWorkouts] : [...savedWorkouts];
+
+    items.sort((a, b) => {
+      if (sortBy === "duration") {
+        return a.duration - b.duration;
+      }
+
+      if (sortBy === "calories") {
+        return a.caloriesBurned - b.caloriesBurned;
+      }
+
+      return b.rating - a.rating;
+    });
+
+    return items;
+  }, [activeTab, planWorkouts, savedWorkouts, sortBy]);
 
   const totalMinutes = planWorkouts.reduce(
     (total, workout) => total + workout.duration,
@@ -79,7 +98,7 @@ export default function PlanClient() {
         calories={totalCalories}
       />
 
-      <div className="mt-10">
+      <div className="mt-10 flex flex-col gap-5 border-white/10 sm:flex-row sm:items-end sm:justify-between">
         <div className="tabs tabs-box">
           <input
             type="radio"
@@ -98,6 +117,23 @@ export default function PlanClient() {
             checked={activeTab === "saved"}
             onChange={() => setActiveTab("saved")}
           />
+        </div>
+
+        <div className="flex items-center gap-2 ">
+          <span className="text-xs font-bold text-white/50">Sort By</span>
+
+          <div className="relative">
+            <select
+              value={sortBy}
+              onChange={(event) => setSortBy(event.target.value as SortKey)}
+              className="select h-10 min-h-10 appearance-none rounded-md border-white/10 bg-[#15171c] pr-10 text-xs font-bold text-white"
+              aria-label="Sort workouts"
+            >
+              <option value="duration">Duration</option>
+              <option value="calories">Calories</option>
+              <option value="rating">Rating</option>
+            </select>
+          </div>
         </div>
       </div>
 
