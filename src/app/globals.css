@@ -22,8 +22,14 @@ body {
 }
 
 a,
-button {
+button,
+select {
   -webkit-tap-highlight-color: transparent;
+}
+
+button,
+select {
+  font: inherit;
 }
 
 ::selection {

@@ -3,9 +3,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { LuDumbbell, LuMenu, LuX } from "react-icons/lu";
+import NavLogo from "@/assets/logo.png";
+import { LuMenu, LuX } from "react-icons/lu";
 
 import { usePlan } from "@/context/PlanContext";
+import Image from "next/image";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -23,13 +25,20 @@ export default function Navbar() {
   return (
     <header className="border-b border-white/5 bg-[#0d0e11]">
       <div className="mx-auto flex max-w-[1280px] items-center justify-between px-5 py-4 sm:px-8">
+        {/* Logo */}
         <Link
           href="/"
-          className="flex items-center gap-2"
+          className="flex items-center gap-2 text-white"
           onClick={() => setMenuOpen(false)}
         >
-          <span className="grid size-9 place-items-center rounded-full bg-[#ccff00] text-black">
-            <LuDumbbell size={19} />
+          <span className="grid size-9 place-items-center">
+            <Image
+              src={NavLogo}
+              alt="FitLog Logo"
+              width={28}
+              height={28}
+              className="object-contain"
+            />
           </span>
 
           <span className="display-font text-xl font-bold tracking-wide">
