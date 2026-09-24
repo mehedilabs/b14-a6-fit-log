@@ -73,7 +73,7 @@ export default function WorkoutDetails({ workout }: WorkoutDetailsProps) {
             width={588}
             height={773}
             priority
-            className="object-contain"
+            className="h-full w-full object-contain"
           />
         </div>
 
@@ -141,7 +141,7 @@ export default function WorkoutDetails({ workout }: WorkoutDetailsProps) {
             </ol>
           </div>
 
-          <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-7 flex items-center gap-2">
             <button
               type="button"
               onClick={handleAddToPlan}
@@ -160,7 +160,7 @@ export default function WorkoutDetails({ workout }: WorkoutDetailsProps) {
               type="button"
               onClick={handleSave}
               disabled={!hydrated}
-              className={`inline-flex min-w-0 w-fit items-center justify-center gap-2 rounded-[12px] px-3 py-2 text-sm font-bold transition ${
+              className={`inline-flex min-w-0 w-fit items-center justify-center gap-2 rounded-[12px] px-6 py-2 text-sm font-bold transition ${
                 alreadySaved
                   ? "cursor-not-allowed border border-white/15 bg-[#1E2330] text-white/60 opacity-40"
                   : "border border-white/15 text-white hover:border-white/40"

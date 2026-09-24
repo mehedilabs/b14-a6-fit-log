@@ -1,7 +1,12 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import WorkoutDetails from "@/components/details/WorkoutDetails";
 import { getWorkoutById } from "@/lib/api";
+
+export const metadata: Metadata = {
+  title: "Details",
+};
 
 type WorkoutDetailsPageProps = {
   params: Promise<{

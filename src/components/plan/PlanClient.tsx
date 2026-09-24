@@ -78,6 +78,17 @@ export default function PlanClient() {
     (total, workout) => total + workout.caloriesBurned,
     0,
   );
+  const currentMetrics = activeTab === "plan" ? planWorkouts : savedWorkouts;
+
+  const currentMinutes = currentMetrics.reduce(
+    (total, workout) => total + workout.duration,
+    0,
+  );
+
+  const currentCalories = currentMetrics.reduce(
+    (total, workout) => total + workout.caloriesBurned,
+    0,
+  );
 
   if (loading) {
     return (
@@ -131,9 +142,9 @@ export default function PlanClient() {
       </div>
 
       <PlanMetrics
-        exercises={planWorkouts.length}
-        minutes={totalMinutes}
-        calories={totalCalories}
+        exercises={currentMetrics.length}
+        minutes={currentMinutes}
+        calories={currentCalories}
       />
 
       <div className="mt-10 flex flex-col gap-5 border-white/10 sm:flex-row sm:items-end sm:justify-between">

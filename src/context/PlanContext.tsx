@@ -95,8 +95,8 @@ export function PlanProvider({ children }: { children: ReactNode }) {
 
   function removeFromPlan(id: number) {
     setPlanIds((prev) => prev.filter((item) => item !== id));
+    setDoneIds((prev) => prev.filter((item) => item !== id));
   }
-
   function saveForLater(id: number): SaveResult {
     if (savedIds.includes(id)) {
       return "exists";

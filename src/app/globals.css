@@ -40,3 +40,46 @@ select {
 .display-font {
   font-family: var(--font-oswald), sans-serif;
 }
+
+@media (max-width: 640px) {
+ .Toastify__toast-container {
+  width: auto !important;
+  left: auto !important;
+  right: 16px !important;
+}
+
+  .Toastify__toast {
+    width: fit-content !important;
+    min-width: 0 !important;
+    max-width: calc(100vw - 32px) !important;
+    min-height: 40px;
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .Toastify__toast-body {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+/* Desktop + Tablet */
+@media (min-width: 641px) {
+  .Toastify__toast-container {
+    width: auto !important;
+    left: auto !important;
+    right: 16px !important;
+  }
+
+  .Toastify__toast {
+    width: fit-content !important;
+    min-width: 0 !important;
+    max-width: calc(100vw - 32px);
+    padding: 10px 14px;
+  }
+
+  .Toastify__toast-body {
+    margin: 0;
+    padding: 0;
+  }
+}

@@ -23,7 +23,7 @@ export default function Navbar() {
   const planActive = pathname.startsWith("/my-plan");
 
   return (
-    <header className="border-b border-white/5 bg-[#0d0e11]">
+    <header className="sticky top-0 z-50 border-b border-white/5 bg-[#0d0e11]">
       <div className="mx-auto flex max-w-[1280px] items-center justify-between px-5 py-4 sm:px-8">
         {/* Logo */}
         <Link
@@ -101,41 +101,39 @@ export default function Navbar() {
       </div>
 
       {menuOpen && (
-        <div className="border-t border-white/5 px-5 py-5 md:hidden">
-          <nav className="flex flex-col gap-4">
-            <Link
-              href="/"
-              onClick={() => setMenuOpen(false)}
-              className={`text-sm font-medium ${
-                workoutActive ? "text-[#ccff00]" : "text-white/70"
-              }`}
-            >
-              Workouts
-            </Link>
+        <div className="border-t border-white/5 px-5 py-3 md:hidden">
+          <nav className="flex flex-col items-center">
+            <div className="flex items-center gap-8">
+              <Link
+                href="/"
+                className={`text-sm font-bold ${
+                  workoutActive ? "text-[#ccff00]" : "text-white/70"
+                }`}
+              >
+                Workouts
+              </Link>
 
-            <Link
-              href="/my-plan?tab=plan"
-              onClick={() => setMenuOpen(false)}
-              className={`text-sm font-medium ${
-                planActive ? "text-[#ccff00]" : "text-white/70"
-              }`}
-            >
-              My Plan
-            </Link>
-
-            <div className="flex gap-3 pt-2">
               <Link
                 href="/my-plan?tab=plan"
-                onClick={() => setMenuOpen(false)}
-                className="rounded-full bg-[#ccff00] px-4 py-2 text-sm font-bold text-black"
+                className={`text-sm font-bold ${
+                  planActive ? "text-[#ccff00]" : "text-white/70"
+                }`}
+              >
+                My Plan
+              </Link>
+            </div>
+
+            <div className="mt-3 flex items-center gap-2">
+              <Link
+                href="/my-plan?tab=plan"
+                className="rounded-full bg-[#ccff00] px-3 py-1.5 text-[11px] font-bold text-black"
               >
                 Plan {planCount}
               </Link>
 
               <Link
                 href="/my-plan?tab=saved"
-                onClick={() => setMenuOpen(false)}
-                className="rounded-full border border-white/20 px-4 py-2 text-sm font-bold"
+                className="rounded-full border border-white/20 px-3 py-1.5 text-[11px] font-bold text-white"
               >
                 Saved {savedCount}
               </Link>
