@@ -175,7 +175,7 @@ export default function PlanClient() {
             <select
               value={sortBy}
               onChange={(event) => setSortBy(event.target.value as SortKey)}
-              className="select h-10 min-h-10 appearance-none rounded-md border-white/10 bg-[#15171c] pr-10 text-xs font-bold text-white"
+              className="select h-8 min-h-8 w-[110px] appearance-none rounded-md border-white/10 bg-[#15171c] pr-8 text-[11px] font-bold text-white sm:h-10 sm:min-h-10 sm:w-auto sm:pr-10 sm:text-xs"
               aria-label="Sort workouts"
             >
               <option value="duration">Duration</option>

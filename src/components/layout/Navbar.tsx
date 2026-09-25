@@ -71,10 +71,10 @@ export default function Navbar() {
         <div className="hidden items-center gap-3 md:flex">
           <Link
             href="/my-plan?tab=plan"
-            className="flex items-center gap-2 rounded-full bg-[#ccff00] px-4 py-2 text-sm font-bold text-black"
+            className="flex items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-sm font-bold"
           >
             Plan
-            <span className="grid size-5 place-items-center rounded-full bg-black text-xs text-[#ccff00]">
+            <span className="grid size-5 place-items-center rounded-full bg-[#ccff00] text-xs text-black">
               {planCount}
             </span>
           </Link>

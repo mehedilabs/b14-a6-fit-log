@@ -58,16 +58,12 @@ function readIds(key: string): number[] {
 }
 
 export function PlanProvider({ children }: { children: ReactNode }) {
-  const [planIds, setPlanIds] = useState<number[]>([]);
-  const [savedIds, setSavedIds] = useState<number[]>([]);
-  const [doneIds, setDoneIds] = useState<number[]>([]);
+  const [planIds, setPlanIds] = useState<number[]>(() => readIds(PLAN_KEY));
+  const [savedIds, setSavedIds] = useState<number[]>(() => readIds(SAVED_KEY));
+  const [doneIds, setDoneIds] = useState<number[]>(() => readIds(DONE_KEY));
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
-    setPlanIds(readIds(PLAN_KEY));
-    setSavedIds(readIds(SAVED_KEY));
-    setDoneIds(readIds(DONE_KEY));
-
     setHydrated(true);
   }, []);
 

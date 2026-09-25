@@ -141,18 +141,18 @@ export default function WorkoutDetails({ workout }: WorkoutDetailsProps) {
             </ol>
           </div>
 
-          <div className="mt-7 flex items-center gap-2">
+          <div className="mt-7 flex items-center gap-1 sm:gap-2">
             <button
               type="button"
               onClick={handleAddToPlan}
               disabled={!hydrated || (planIds.length >= 5 && !alreadyInPlan)}
-              className={`inline-flex min-w-0 w-fit items-center justify-center gap-2 rounded-[12px] px-4 py-2 text-sm font-black transition ${
+              className={`inline-flex min-w-0 w-fit items-center justify-center gap-1 rounded-[12px] px-1.5 py-2 text-xs font-black transition sm:gap-2 sm:px-4 sm:text-sm ${
                 alreadyInPlan
                   ? "cursor-not-allowed border border-[#ccff00]/30 bg-[#1E2330] text-[#ccff00] opacity-40"
                   : "bg-[#ccff00] text-black hover:bg-[#d8ff33]"
               } disabled:cursor-not-allowed disabled:opacity-40`}
             >
-              <LuCalendarPlus size={18} />
+              <LuCalendarPlus size={16} />
               {alreadyInPlan ? "In today's plan ✓" : "Add to today's plan"}
             </button>
 
@@ -160,13 +160,13 @@ export default function WorkoutDetails({ workout }: WorkoutDetailsProps) {
               type="button"
               onClick={handleSave}
               disabled={!hydrated}
-              className={`inline-flex min-w-0 w-fit items-center justify-center gap-2 rounded-[12px] px-6 py-2 text-sm font-bold transition ${
+              className={`inline-flex min-w-0 w-fit items-center justify-center gap-1 rounded-[12px] px-1.5 py-2 text-xs font-bold transition sm:gap-2 sm:px-6 sm:text-sm ${
                 alreadySaved
                   ? "cursor-not-allowed border border-white/15 bg-[#1E2330] text-white/60 opacity-40"
                   : "border border-white/15 text-white hover:border-white/40"
               } disabled:cursor-not-allowed disabled:opacity-40`}
             >
-              <LuBookmark size={18} />
+              <LuBookmark size={16} />
               {alreadySaved ? "Saved ✓" : "Save for later"}
             </button>
           </div>
